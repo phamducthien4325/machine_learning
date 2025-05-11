@@ -1,6 +1,6 @@
-# Repo tự học machine learning cơ bản của tôi
+# Repo tự học machine learning cơ bản
 
-Các file code trong này tôi tham khảo từ nhiều nguồn và tự code lại.
+Các file code trong này được tham khảo từ nhiều nguồn và tự code lại.
 
 Các nguồn tham khảo:
 - https://machinelearningcoban.com/
