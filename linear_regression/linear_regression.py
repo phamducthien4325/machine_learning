@@ -43,4 +43,3 @@ if __name__ == "__main__":
 
     print("Model weights: ", model.w)
     print("Sklearn model weights: ", sklearn_model.coef_)
-    
