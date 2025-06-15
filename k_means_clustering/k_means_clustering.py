@@ -15,10 +15,6 @@ class KMeansClustering:
         X : np.ndarray
             The dataset to fit the model to.
 
-        Returns
-        -------
-        self@KMeansClustering
-            The fitted KMeans model.
         """
         centers = self._initialize_centroids(X)
         it = 0
@@ -33,7 +29,6 @@ class KMeansClustering:
             # print(f"Iteration {it}: centers = {centers}")
         # print(f"Final centers: {centers}")
         self.cluster_centers_ = centers
-        return self
 
     def _initialize_centroids(self, X: np.ndarray) -> np.ndarray:
         """
