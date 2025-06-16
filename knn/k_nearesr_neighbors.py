@@ -1,4 +1,5 @@
 import numpy as np
+from scipy.spatial.distance import cdist
 
 class K_nearest_neighbors:
     def __init__(self, n_neighbors: int = 3, p: int = 2, weights: str = 'uniform'):
@@ -13,22 +14,14 @@ class K_nearest_neighbors:
         self.y_train = y
 
     def predict(self, X):
+        distances = cdist(X, self.X_train, metric='minkowski', p=self.p)
         y_pred = []
         for i in range(X.shape[0]):
-            nearest_distances, nearest_labels = self.__find_nearest_neighbors(X[i])
-            label_pred = self.__find_label(nearest_distances, nearest_labels)
+            nearest = np.argpartition(distances[i], self.n_neighbors - 1)[:self.n_neighbors]
+            nearest_labels = self.y_train[nearest]
+            label_pred = self.__find_label(distances[i], nearest_labels)
             y_pred.append(label_pred)
         return np.array(y_pred)
-    
-    def __find_nearest_neighbors(self, X):
-        distances = self.__compute_distances(X)
-        nearest = np.argpartition(distances, self.n_neighbors - 1)[:self.n_neighbors]
-        nearest_distances = distances[nearest]
-        nearest_labels = self.y_train[nearest]
-        return nearest_distances, nearest_labels
-
-    def __compute_distances(self, X):
-        return np.linalg.norm(self.X_train - X, ord=self.p, axis=1)
     
     def __find_label(self, distances, labels):
         match self.weights:
